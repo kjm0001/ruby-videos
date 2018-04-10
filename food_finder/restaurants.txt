@@ -1,0 +1,4 @@
+Kyle's Place	Korean	25.00
+Cafe Masal	Indian	5
+pita pocket	Fast food	10
+pita pocket2	fast food	25
