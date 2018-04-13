@@ -35,7 +35,9 @@ puts names
 names.delete_at(0) # remove item at this position
 puts names
 
-names.delete('Fred')  # remove a specific value
+names.delete('Fred')  # remove every specific value
 puts names
+
+
 
 
