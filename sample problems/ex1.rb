@@ -1,18 +1,20 @@
-# LESSER OF TWO EVENS: Write a function that returns the lesser of two given numbers if both numbers are even, but returns the greater if one or both numbers are odd¶
+# LESSER OF TWO EVENS: Write a function that returns the lesser of two given numbers if both numbers are even,
+# but returns the greater if one or both numbers are odd
 # lesser_of_two_evens(2,4) --> 2
 # lesser_of_two_evens(2,5) --> 5
 puts "Testng lesser_of_two_evens function"
 def lesser_of_two_evens(a,b)
     # both conditions are met
     if a % 2 == 0 and b % 2 == 0
-        a < b ? a : b # if a < b return a else return b
+        return [a,b].min # return min
     else
-        a > b ? a : b # if a > b return a else return b
+        return [a,b].max # return max
     end
 end
 
 puts (lesser_of_two_evens(2,4))
 puts (lesser_of_two_evens(2,5))
+puts (lesser_of_two_evens(7,5))
 
 # ANIMAL CRACKERS: Write a function takes a two-word string and returns True if both words begin with same letter¶
 # animal_crackers('Levelheaded Llama') --> True
@@ -20,7 +22,7 @@ puts (lesser_of_two_evens(2,5))
 
 puts "Testing animal_crackers function"
 def animal_crackers(text)
-  my_list = text.split(" ")
+  my_list = text.upcase.split(" ")
   return my_list[0][0] == my_list[1][0]
 end
 
@@ -35,7 +37,7 @@ puts animal_crackers('Crazy Kangaroo')
 puts "Testing makes_twenty function"
 
 def makes_twenty(num1,num2)
-  return (num1 + num2 == 20) || (num1 == 20) || (num2 == 20)
+  return (num1 + num2 == 20) || [num1,num2].include?(20)
 
 end
 
@@ -50,15 +52,11 @@ puts makes_twenty(2,3)
 puts "Testing old_macdonald function"
 
 def old_macdonald(name)
-    new_word = ''
-    name.each_char.with_index do |letter, index|
-        if index == 0 or index == 3
-            new_word = new_word + letter.capitalize
-        else
-            new_word = new_word + letter
-        end
-    end
-    return new_word
+
+    first_part  = name[0..2]
+    second_part = name[3..-1]
+
+    return first_part.capitalize + second_part.capitalize
 end
 
 puts old_macdonald('macdonald')
@@ -113,25 +111,22 @@ puts "Testing has_33 function"
 def has_33(nums)
 
   check_list = [3,3]
-  size = nums.length
-  matches = FALSE
-  x = 0; y = 2; counter = 0
 
-  while counter < size
-    if check_list == nums[x,y]
-     matches = TRUE
-     break
-    else
-      x +=1; y+=1; counter +=1
+  for i in (0..(nums.length) -1)
+    if check_list == nums[i,1+2]
+      puts(check_list)
+      puts(nums[i..1+2])
+      return true
     end
   end
+    return false
 
-  return matches
 end
 
 puts has_33([1, 3, 3])    # → True
 puts has_33([1, 3, 1, 3]) # → False
 puts has_33([3, 1, 3])    # → False
+puts has_33([3, 1, 3, 3, 2, 5])    # → False
 
 # PAPER DOLL: Given a string, return a string where for every character in the original there are three characters
 # paper_doll('Hello') --> 'HHHeeellllllooo'
@@ -191,16 +186,10 @@ puts "Testing method summer_69"
 def summer_69(arr)
 
   if arr.include? 6
-    #beg_pos = arr.index(6)
-    #puts beg_pos
-    #end_pos = arr.index(9)
-    #puts end_pos
     sum_array = []
     arr.each do |num|
       if num < 6 or num > 9
-        #puts "num value is : #{num}"
         sum_array = sum_array.push(num)
-        #puts "new array: #{new_array}"
       end
     end
   else
